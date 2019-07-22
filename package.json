@@ -1,5 +1,5 @@
 {
-  "name": "bus",
+  "name": "furugoori",
   "version": "1.0.0",
   "main": "lib/index.js",
   "repository": "https://github.com/lukedsmalley/bus",
@@ -12,12 +12,17 @@
     "@types/fs-extra": "^8.0.0",
     "@types/js-yaml": "^3.12.1",
     "@types/node": "^12.6.2",
+    "@types/passport": "^1.0.0",
+    "@types/passport-http": "^0.3.8",
     "typescript": "^3.5.3"
   },
   "dependencies": {
+    "aws-sdk": "^2.493.0",
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
     "fs-extra": "^8.1.0",
-    "js-yaml": "^3.13.1"
+    "js-yaml": "^3.13.1",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0"
   }
 }

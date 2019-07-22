@@ -3,6 +3,14 @@ import { access, constants, lstat, outputFile, readFile } from 'fs-extra'
 import { safeLoad, safeDump } from 'js-yaml'
 import { resolve } from 'path'
 
+export interface Config {
+  awsAccessKeyID: string
+  awsEndpoint: string | null
+  awsSecretAccessKey: string
+  identityBucketName: string
+  port: number
+}
+
 export async function isFile(...parts: any[]): Promise<boolean> {
   try {
     let cat = resolve(...parts)
@@ -13,6 +21,10 @@ export async function isFile(...parts: any[]): Promise<boolean> {
   }
 }
 
+export function outputYAML(target: string, data: any) {
+  return outputFile(resolve(target), safeDump(data))
+}
+
 export async function inputYAML<T extends object>(source: string, defaults: T) {
   if (!await isFile(source)) {
     await outputYAML(source, defaults)
@@ -21,10 +33,6 @@ export async function inputYAML<T extends object>(source: string, defaults: T) {
     const data = safeLoad(await readFile(resolve(source), { encoding: 'utf8' }))
     return Object.assign({}, defaults, data) as T
   }
-}
-
-export function outputYAML(target: string, data: any) {
-  return outputFile(resolve(target), safeDump(data))
 }
 
 export function getSHA512(data: string) {
