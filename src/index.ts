@@ -6,7 +6,7 @@ import { S3 } from 'aws-sdk'
 (async () => {
   const config = await inputYAML<Config>('./config.yml', {
     awsAccessKeyID: 'unspecified',
-    awsEndpoint: 'unspecified',
+    awsEndpoint: null,
     awsSecretAccessKey: 'unspecified',
     identityBucketName: 'unspecified',
     port: 8080
@@ -14,6 +14,7 @@ import { S3 } from 'aws-sdk'
 
   const s3 = new S3({
     endpoint: config.awsEndpoint || undefined,
+    s3BucketEndpoint: config.awsEndpoint !== null,
     accessKeyId: config.awsAccessKeyID,
     secretAccessKey: config.awsSecretAccessKey
   })
